@@ -12,7 +12,7 @@ jobs:
         shell: powershell
         run: |
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
-          Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+          Enable-NetFewallRule -DisplayGroup "Remote Desktop"
 
       - name: Create User
         shell: powershell
@@ -39,8 +39,9 @@ jobs:
       - name: Show Tunnel
         shell: powershell
         run: |
-          Start-Sleep -Seconds 20
-          Get-Content "$env:USERPROFILE\.loclx\loclx.log"
+          Start-Sleep -Seconds 10
+          .\loclx.exe tunnels list
+  
 
       - name: Keep Alive
         shell: powershell
