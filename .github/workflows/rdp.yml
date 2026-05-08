@@ -30,7 +30,7 @@ jobs:
       - name: Login LocalXpose
         shell: powershell
         run: |
-          .\loclx.exe auth YOUR_LOCALXPOSE_TOKEN
+          .\loclx.exe auth EUfoSVK9cRcpxhPMv1nt9FyqbO1ip3dyGzleB3YM
 
       - name: Create Tunnel
         shell: powershell
