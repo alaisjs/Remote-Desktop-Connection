@@ -9,17 +9,6 @@ jobs:
     timeout-minutes: 360
 
     steps:
-      - name: Download Ngrok
-        shell: powershell
-        run: |
-          Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
-          Expand-Archive ngrok.zip
-
-      - name: Setup Ngrok
-        shell: powershell
-        run: |
-          .\ngrok\ngrok.exe config add-authtoken $env:NGROK_AUTH_TOKEN
-
       - name: Enable RDP
         shell: powershell
         run: |
@@ -32,16 +21,27 @@ jobs:
           net user runneradmin P@ssw0rd123 /add
           net localgroup administrators runneradmin /add
 
-      - name: Start Ngrok
+      - name: Download LocalXpose
         shell: powershell
         run: |
-          Start-Process .\ngrok\ngrok.exe -ArgumentList "tcp 3389"
+          Invoke-WebRequest https://localxpose.io/api/v2/downloads/loclx-windows-amd64.zip -OutFile loclx.zip
+          Expand-Archive loclx.zip
 
-      - name: Show RDP Info
+      - name: Login LocalXpose
+        shell: powershell
+        run: |
+          .\loclx.exe auth YOUR_LOCALXPOSE_TOKEN
+
+      - name: Create Tunnel
+        shell: powershell
+        run: |
+          Start-Process .\loclx.exe -ArgumentList "tunnel tcp --to 3389"
+
+      - name: Show Tunnel
         shell: powershell
         run: |
           Start-Sleep -Seconds 20
-          Invoke-RestMethod http://127.0.0.1:4040/api/tunnels
+          Get-Content "$env:USERPROFILE\.loclx\loclx.log"
 
       - name: Keep Alive
         shell: powershell
@@ -49,4 +49,3 @@ jobs:
           while ($true) {
             Start-Sleep -Seconds 60
           }
-          
