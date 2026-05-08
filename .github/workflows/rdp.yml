@@ -34,10 +34,16 @@ jobs:
       #  shell: powershell
       #  run: |
        #   Invoke-WebRequest https://github.com/localxpose/localxpose/releases/download/v1.4.0/loclx-windows-amd64.exe -OutFile loclx.exe
-          - name: Download LocalXpose
+          
+      #  shell: powershell
+        #run: |
+          #curl.exe -L "https://github.com/localxpose/localxpose/releases/download/v1.4.0/loclx-windows-amd64.exe" -o loclx.exe
+     
+           - name: Download LocalXpose
         shell: powershell
         run: |
           curl.exe -L "https://github.com/localxpose/localxpose/releases/download/v1.4.0/loclx-windows-amd64.exe" -o loclx.exe
+     
       - name: Login LocalXpose
         shell: powershell
         run: |
