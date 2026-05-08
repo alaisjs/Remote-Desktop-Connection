@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    timeout-minutes: 360
 
     steps:
       - name: Enable RDP
@@ -29,7 +30,7 @@ jobs:
       - name: Login LocalXpose
         shell: powershell
         run: |
-          .\loclx.exe account login --token EUfoSVK9cRcpxhPMv1nt9FyqbO1ip3dyGzleB3YM
+          .\loclx.exe account login --token EUfoSVK9cRcpxhPMv1nt9Fyqb01ip3dyGzleB3YM
 
       - name: Create Tunnel
         shell: powershell
@@ -39,7 +40,7 @@ jobs:
       - name: Show Tunnel
         shell: powershell
         run: |
-          Start-Sleep -Seconds 10
+          Start-Sleep -Seconds 15
           .\loclx.exe tunnels list
 
       - name: Keep Alive
