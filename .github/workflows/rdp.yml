@@ -15,12 +15,16 @@ jobs:
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
           Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
+      ## name: Create User
+      ##  shell: powershell
+       ## run: |
+         ## net user runneradmin P@ssw0rd123 /add
+       ##   net localgroup administrators runneradmin /add
       - name: Create User
         shell: powershell
         run: |
-          net user runneradmin P@ssw0rd123 /add
-          net localgroup administrators runneradmin /add
-
+          cmd /c "net user runneradmin P@ssw0rd123 /add || exit /b 0"
+          cmd /c "net localgroup administrators runneradmin /add || exit /b 0"
       - name: Download LocalXpose
         shell: powershell
         run: |
