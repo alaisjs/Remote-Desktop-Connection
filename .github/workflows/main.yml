@@ -26,7 +26,7 @@ jobs:
           curl.exe -L "https://api.localxpose.io/api/v2/downloads/loclx-windows-amd64.zip" -o loclx.zip
           tar -xf loclx.zip
 
-       - name: Login LocalXpose
+      - name: Login LocalXpose
         shell: powershell
         run: |
           .\loclx.exe account login --token EUfoSVK9cRcpxhPMv1nt9FyqbO1ip3dyGzleB3YM
