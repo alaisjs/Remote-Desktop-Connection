@@ -30,10 +30,14 @@ jobs:
        # run: |
          # Invoke-WebRequest https://localxpose.io/api/v2/downloads/loclx-windows-amd64.zip -OutFile loclx.zip
         #  Expand-Archive loclx.zip
-      - name: Download LocalXpose
+     # - name: Download LocalXpose
+      #  shell: powershell
+      #  run: |
+       #   Invoke-WebRequest https://github.com/localxpose/localxpose/releases/download/v1.4.0/loclx-windows-amd64.exe -OutFile loclx.exe
+          - name: Download LocalXpose
         shell: powershell
         run: |
-          Invoke-WebRequest https://github.com/localxpose/localxpose/releases/download/v1.4.0/loclx-windows-amd64.exe -OutFile loclx.exe
+          curl.exe -L "https://github.com/localxpose/localxpose/releases/download/v1.4.0/loclx-windows-amd64.exe" -o loclx.exe
       - name: Login LocalXpose
         shell: powershell
         run: |
